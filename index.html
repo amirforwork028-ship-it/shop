@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shoply — интернет-магазин современной электроники и гаджетов.">
+  <title>Shoply — электроника и гаджеты</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="#" aria-label="Shoply — главная">shoply<span>.</span></a>
+
+    <nav class="main-nav" aria-label="Основная навигация">
+      <a href="#home">Главная</a>
+      <a href="#catalog">Каталог</a>
+      <a href="#benefits">О нас</a>
+    </nav>
+
+    <div class="header-actions">
+      <label class="search-box" aria-label="Поиск товаров">
+        <span aria-hidden="true">⌕</span>
+        <input id="searchInput" type="search" placeholder="Найти товар..." autocomplete="off">
+      </label>
+      <button class="icon-button" id="authButton" aria-label="Войти в аккаунт" title="Аккаунт">
+        <span aria-hidden="true">♙</span><span class="auth-button-label" id="authButtonLabel">Войти</span>
+      </button>
+      <button class="icon-button" id="favoritesButton" aria-label="Показать избранное" title="Избранное">
+        ♡ <span class="counter" id="favoritesCount">0</span>
+      </button>
+      <button class="icon-button cart-trigger" id="cartButton" aria-label="Открыть корзину" title="Корзина">
+        ♧ <span class="counter" id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-copy">
+        <p class="eyebrow">ТЕХНОЛОГИИ ДЛЯ КАЖДОГО ДНЯ</p>
+        <h1>Техника, которая<br>делает жизнь <em>проще.</em></h1>
+        <p class="hero-description">Откройте для себя современные гаджеты, продуманный дизайн и технологии, которым хочется доверять.</p>
+        <a class="primary-button" href="#catalog">Перейти к покупкам <span>↗</span></a>
+        <div class="hero-note"><span class="note-dot"></span> Подборка актуальных устройств</div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-orbit orbit-one"></div>
+        <div class="hero-orbit orbit-two"></div>
+        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1000&q=85" alt="Стильные беспроводные наушники" class="hero-product">
+        <div class="floating-card">
+          <span class="floating-label">ВЫБОР НЕДЕЛИ</span>
+          <strong>Новые впечатления.</strong>
+          <span>Начинаются с деталей.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="benefit-strip" id="benefits">
+      <div><span class="benefit-icon">◇</span><span><strong>Качество</strong><small>Проверенные товары</small></span></div>
+      <div><span class="benefit-icon">↗</span><span><strong>Быстрая доставка</strong><small>Удобно и надёжно</small></span></div>
+      <div><span class="benefit-icon">♡</span><span><strong>Забота о клиентах</strong><small>Поддержка на каждом шаге</small></span></div>
+    </section>
+
+    <section class="catalog-section" id="catalog">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">НАШ АССОРТИМЕНТ</p>
+          <h2>Найди своё <em>устройство.</em></h2>
+        </div>
+        <p class="section-description">Полезные технологии<br>на каждый день.</p>
+      </div>
+
+      <div class="catalog-toolbar">
+        <div class="category-list" id="categoryList" aria-label="Категории товаров">
+          <button class="category-chip active" data-category="Все">Все товары</button>
+          <button class="category-chip" data-category="Смартфоны">Смартфоны</button>
+          <button class="category-chip" data-category="Наушники">Наушники</button>
+          <button class="category-chip" data-category="Ноутбуки">Ноутбуки</button>
+          <button class="category-chip" data-category="Часы">Часы</button>
+          <button class="category-chip" data-category="Аксессуары">Аксессуары</button>
+        </div>
+        <label class="sort-control">
+          <span>Сортировка</span>
+          <select id="sortSelect" aria-label="Сортировка товаров">
+            <option value="default">По умолчанию</option>
+            <option value="price-asc">Сначала дешевле</option>
+            <option value="price-desc">Сначала дороже</option>
+            <option value="name">По названию</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="results-line">
+        <span id="resultsCount">Все товары</span>
+        <button class="text-button" id="clearFiltersButton">Сбросить фильтры</button>
+      </div>
+
+      <div class="product-grid" id="productGrid" aria-live="polite"></div>
+      <div class="empty-state hidden" id="emptyState">
+        <span>⌕</span>
+        <h3>Ничего не найдено</h3>
+        <p>Попробуйте изменить запрос или выбрать другую категорию.</p>
+        <button class="secondary-button" id="emptyResetButton">Показать все товары</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="logo footer-logo" href="#">shoply<span>.</span></a>
+    <p>Технологии. Просто и со вкусом.</p>
+    <span>© 2026 Shoply. Учебный проект.</span>
+  </footer>
+
+  <div class="overlay hidden" id="overlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Корзина" aria-hidden="true">
+    <div class="drawer-header">
+      <div><p class="eyebrow">ВАШ ВЫБОР</p><h2>Корзина <span id="drawerCartCount">(0)</span></h2></div>
+      <button class="close-button" id="closeCartButton" aria-label="Закрыть корзину">×</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="total-line"><span>Итого</span><strong id="cartTotal">0 ₸</strong></div>
+      <button class="primary-button checkout-button" id="checkoutButton">Оформить заказ <span>→</span></button>
+      <p class="cart-disclaimer">Демонстрационный магазин. Оплата не производится.</p>
+    </div>
+  </aside>
+
+  <div class="auth-overlay hidden" id="authOverlay"></div>
+  <section class="auth-modal hidden" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <button class="auth-close" id="authClose" aria-label="Закрыть окно">×</button>
+    <a class="logo auth-logo" href="#">shoply<span>.</span></a>
+    <p class="eyebrow">ВАШ ЛИЧНЫЙ ПРОФИЛЬ</p>
+    <h2 id="authTitle">Добро пожаловать</h2>
+    <p class="auth-subtitle" id="authSubtitle">Войдите или создайте аккаунт Shoply.</p>
+    <div class="auth-tabs">
+      <button class="auth-tab active" type="button" data-auth-mode="login">Вход</button>
+      <button class="auth-tab" type="button" data-auth-mode="register">Регистрация</button>
+    </div>
+    <form id="authForm" class="auth-form">
+      <label id="nameField" class="hidden">Ваше имя<input id="authName" type="text" autocomplete="name" placeholder="Например, Алексей" minlength="2"></label>
+      <label>Электронная почта<input id="authEmail" type="email" autocomplete="email" placeholder="name@example.com" required></label>
+      <label>Пароль<input id="authPassword" type="password" autocomplete="current-password" placeholder="Не менее 6 символов" minlength="6" required></label>
+      <button class="primary-button auth-submit" id="authSubmit" type="submit">Войти <span>→</span></button>
+      <p class="auth-message" id="authMessage" role="status"></p>
+    </form>
+    <p class="auth-disclaimer">Демонстрационная авторизация для учебного проекта. Не используйте настоящие пароли.</p>
+  </section>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
